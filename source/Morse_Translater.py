@@ -24,7 +24,7 @@ class Morse_Translater():
         
         for c in self.input:
             if(c == " "):
-                self.code.append(self.blank_carac)
+                self.code.append(self.blank_carac) #Doubling the space between words
             else: 
                 morse_carac_str = self.corr[self.corr["Latin"] == c.upper()].iloc[0]["Morse"] #getting the Morse translation
 
@@ -42,6 +42,11 @@ class Morse_Translater():
                 self.code.append(self.blank_carac)#And every caracter is followed by a big blank space !  
             
     def to_string(self):
+        """Simple to string function for debugging purposes
+
+        Returns:
+            str: the morse code in string
+        """
         res = ""
         for carac in self.code:
             for sub_carac in carac:

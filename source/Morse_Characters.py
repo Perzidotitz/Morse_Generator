@@ -3,7 +3,7 @@ import numpy as np
 class Morse_Input:
     
     def __init__(self, dur):
-        """Initialize the morse sound.
+        """Initialize a morse caracter.
 
         Args:
             dur (int): Duration of the audio sample in seconds. Each morse character has a fixed duration
@@ -28,7 +28,8 @@ class Morse_Input:
         return ""
     
 class Morse_Dot(Morse_Input):
-    
+    """Dot caracter in morse.
+    """
     def __init__(self):
         
         dur = 0.1
@@ -39,7 +40,8 @@ class Morse_Dot(Morse_Input):
         return "."
 
 class Morse_Dash(Morse_Input):
-    
+    """Dash caracter in morse.
+    """
     def __init__(self):
         
         dur = 0.5
@@ -50,7 +52,8 @@ class Morse_Dash(Morse_Input):
         return "-"
 
 class Morse_Blank():
-    
+    """Blank caracter to differenciate morse symbols - latin letters - words in morse. The duration is related to the type of sequence the blank is ending.
+    """
     def __init__(self, type):
         
         self.fs = 44100
@@ -64,11 +67,16 @@ class Morse_Blank():
         self.signal = None
     
     def generate_signal(self):
-        
+        """Generates an empty signal
+        """
         self.signal =  np.zeros(int(self.dur * self.fs))
     
     def to_string(self):
-        
+        """Simple to string function for debugging purposes
+
+        Returns:
+            str: the res string.
+        """
         if(self.type == "sub_carac"):
             return ""
         else:
