@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np 
 import Morse_Characters as mc
+import Input_Cleaner as ic
 
 class Morse_Translater():
     
@@ -11,7 +12,9 @@ class Morse_Translater():
             input (string): input to translate
             p_csv (string): path to csv morse-latin correspondancy 
         """
-        self.input = input
+        ic_in = ic.Input_Cleaner(input, p_csv)#Cleaning the input to be translated
+        self.input = ic_in.clean()
+        print("... CLEANED INPUT : ", self.input)
         self.corr = pd.read_csv(p_csv)
         self.code = []
         
@@ -40,6 +43,7 @@ class Morse_Translater():
                         self.code.append(self.blank_sub_carac)
 
                 self.code.append(self.blank_carac)#And every caracter is followed by a big blank space !  
+        print("... MORSE TRANSLATION : ", self.to_string())
             
     def to_string(self):
         """Simple to string function for debugging purposes
@@ -49,7 +53,6 @@ class Morse_Translater():
         """
         res = ""
         for carac in self.code:
-            for sub_carac in carac:
-                res += sub_carac.to_string()
+            res += carac.to_string()
         return res
 
